@@ -16,15 +16,19 @@ void rysuj_weza(int dlugosc);
 void plansza_1_ramka(int szer, int wys);
 void plansza_2_ramka_linie(int szer, int wys);
 void clearScreen();
+//zmniejszyc ilosc globalnych
+//zrobic menu i ustawic poziomy
+//dodac punktacje
+//jak trudniejszy tryb waz przyspiesza
+//sprawdzic gdzie powinien byc sleep
 
 const int szerokosc = 50;
 const int wysokosc = 50;
 const int predkosc = 40;
 
-
 int plansza[wysokosc][szerokosc]{};
 int waz[100][2]{};//0=x 1=y
-int waz_poprzedni[100][2]{};
+int waz_poprzedni[100][2]{}; 
 
 int main()
 {
@@ -52,7 +56,6 @@ int main()
 
 
 		//debug
-		//if (kierunek != 0) cout <<endl<<endl<< kierunek;
 		licznik++;
 		cout << licznik;
 	}
@@ -66,14 +69,12 @@ void ustaw_weza(int szer, int wys)
 	uniform_int_distribution<int> zakres_szer(0, szer - 1);
 	int x = 0;
 	int y = 0;
-
 	do
 	{
 		x = zakres_szer(losowa);
 		y = zakres_wys(losowa);
 	} while (plansza[y][x] != 0);
 
-	//plansza[y][x] = 2;
 	waz[0][0] = x;
 	waz[0][1] = y;
 	waz_poprzedni[0][0] = x;
@@ -128,11 +129,8 @@ void ruch_weza(int kierunek) // 1-gora 2-dol 3-lewo 4-prawo
 
 void sprawdz_weza(int &dlugosc, bool& koniec,bool& ustawiony)
 {
-	//for (int i = 0;i < dlugosc;i++)
-	//{
 	if (plansza[waz[0][1]][waz[0][0]] == 1 or plansza[waz[0][1]][waz[0][0]] == 2) koniec = true;
-	//}
-	if ((plansza[waz[0][1]][waz[0][0]] == 3))
+	else if ((plansza[waz[0][1]][waz[0][0]] == 3))
 	{
 		dlugosc++;
 		ustawiony = false;
