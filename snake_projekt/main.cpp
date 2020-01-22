@@ -30,6 +30,7 @@ void clearScreen_nadpisz();
 void clearScreen();
 void ShowConsoleCursor(bool showFlag);
 
+//wpisany znak po zakonczeniu gry
 
 int waz[2500][2]{};//0=x 1=y
 int waz_poprzedni[2500][2]{}; 
@@ -70,7 +71,7 @@ int main()
 		else if (tryb_gry == 2 and koniec_programu == false)
 		{
 			pkt_przygoda_ostatnio = 0;
-			
+
 			if (koniec_gry == false)
 			{
 				clearScreen();
@@ -503,8 +504,7 @@ int sprawdz_weza(int &dlugosc, bool& koniec,bool& ustawiony, int** plansza, int 
 void rysuj2(int szer, int wys, int** plansza,int tryb,int zebrano) //wykorzystanie string duzo przyspiesza wypisywnie
 {
 	string linia;
-	clearScreen_nadpisz();
-	cout << endl << endl;
+	linia += "\n \n";
 	for (int i = 0;i < wys;i++)
 	{
 		linia += "  ";
@@ -517,23 +517,23 @@ void rysuj2(int szer, int wys, int** plansza,int tryb,int zebrano) //wykorzystan
 			else if (plansza[i][j] == 0) linia += " ";
 			else linia += plansza[i][j];
 		}
-		cout << linia << endl;
-		linia.clear();
+		linia += "\n";
 	}
 	if (tryb == 1)
 	{
-		cout << endl;
-		cout << "  Zebrano: " << zebrano << "$" << endl;
-		cout << "  Punkty: " << pkt_ostatnio << endl;;
-		cout << "  Liczba krokow: " << kroki;
+		linia += "\n  Zebrano: " + to_string(zebrano) + "$";
+		linia += "\n  Punkty: " + to_string(pkt_ostatnio);
+		linia += "\n  Liczba krokow: "+ to_string(kroki);
 	}
 	else if (tryb == 2)
 	{
-		cout << endl;
-		cout << "  Zebrano: " << zebrano << "$" << endl;
-		cout << "  Punkty: " << pkt_przygoda_ostatnio << endl;;
-		cout << "  Liczba krokow: " << kroki;
+		linia += "\n  Zebrano: " + to_string(zebrano) + "$";
+		linia += "\n  Punkty: " + to_string(pkt_przygoda_ostatnio);
+		linia += "\n  Liczba krokow: " + to_string(kroki);
 	}
+	clearScreen_nadpisz();
+	cout << linia;
+	linia.clear();
 }
 
 void rysuj_weza(int dlugosc, int** plansza)
